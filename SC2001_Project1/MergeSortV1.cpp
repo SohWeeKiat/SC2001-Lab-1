@@ -1,17 +1,44 @@
 #include "MergeSortV1.hpp"
+#include <iostream>
 
 namespace MergeSortV1 {
+	int comparison = 0;
+
+	void ResetComparison()
+	{
+		comparison = 0;
+	}
+
+	int GetComparison()
+	{
+		return comparison;
+	}
+
 	void Merge(std::vector<int>& nums, int left_index, int mid, int right_index)
 	{
 		if (right_index - left_index <= 0) return;
-		std::vector<int> left(nums.begin() + left_index, nums.begin() + mid);
-		std::vector<int> right(nums.begin() + mid + 1, nums.begin() + right_index);
+		std::vector<int> left(nums.begin() + left_index, nums.begin() + mid + 1);
+		std::vector<int> right(nums.begin() + mid + 1, nums.begin() + right_index + 1);
+
+#if _DEBUG
+		std::cout << "Merge: " << left_index << " " << mid << " " << right_index << std::endl;
+		std::cout << "Left: ";
+		for (int i = 0; i < left.size(); i++) 
+			std::cout << left[i] << " ";
+		std::cout << std::endl;
+		std::cout << "Right: ";
+		for (int i = 0; i < right.size(); i++)
+			std::cout << right[i] << " ";
+		std::cout << std::endl;
+#endif
+
 		int compare = 0;
 		auto left_iter = left.begin();
 		auto right_iter = right.begin();
 		while (left_iter != left.end() && right_iter != right.end()) {
 			compare = *right_iter - *left_iter;
-			if (compare) {//right is bigger
+			comparison++;
+			if (compare > 0) {//right is bigger
 				nums[left_index++] = *left_iter;
 				left_iter++;
 			}
@@ -41,11 +68,26 @@ namespace MergeSortV1 {
 			MergeSort(nums, left, mid);
 			MergeSort(nums, mid + 1, right);
 		}
+#if _DEBUG
+		std::cout << "Before: ";
+		for (int i = 0; i < nums.size(); i++)
+			std::cout << nums[i] << " ";
+		std::cout << std::endl;
+#endif
+
 		Merge(nums, left, mid, right);
+
+#if _DEBUG
+		std::cout << "After: ";
+		for (int i = 0; i < nums.size(); i++)
+			std::cout << nums[i] << " ";
+		std::cout << std::endl;
+#endif
 	}
 
 	void MergeSort(std::vector<int>& nums)
 	{
-		return MergeSort(nums, 0, nums.size());
+		ResetComparison();
+		return MergeSort(nums, 0, nums.size() - 1);
 	}
 }

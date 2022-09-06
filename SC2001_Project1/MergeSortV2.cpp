@@ -1,34 +1,46 @@
 #include "MergeSortV2.hpp"
+#include <iostream>
 
-void InsertionSort(std::vector<int>& nums, int left, int right)
-{
-	if ((right - left) < 1) return;
-	for (int i = left + 1; i <= right; i++) {
-		for (int j = i; j > left; j--) {
-			if (nums[j] < nums[j - 1]) {
-				//swap
-				auto temp = nums[j];
-				nums[j] = nums[j - 1];
-				nums[j - 1] = temp;
-			}
-			else
-				break;
-		}
-	}
-}
+void InsertionSort(std::vector<int>& nums, int left, int right);
 
 namespace MergeSortV2 {
+	int comparison = 0;
+
+	void ResetComparison()
+	{
+		comparison = 0;
+	}
+
+	int GetComparison()
+	{
+		return comparison;
+	}
+
 	void Merge(std::vector<int>& nums, int left_index, int mid, int right_index)
 	{
 		if (right_index - left_index <= 0) return;
-		std::vector<int> left(nums.begin() + left_index, nums.begin() + mid);
-		std::vector<int> right(nums.begin() + mid + 1, nums.begin() + right_index);
+		std::vector<int> left(nums.begin() + left_index, nums.begin() + mid + 1);
+		std::vector<int> right(nums.begin() + mid + 1, nums.begin() + right_index + 1);
+
+#if _DEBUG
+		std::cout << "Merge: " << left_index << " " << mid << " " << right_index << std::endl;
+		std::cout << "Left: ";
+		for (int i = 0; i < left.size(); i++)
+			std::cout << left[i] << " ";
+		std::cout << std::endl;
+		std::cout << "Right: ";
+		for (int i = 0; i < right.size(); i++)
+			std::cout << right[i] << " ";
+		std::cout << std::endl;
+#endif
+
 		int compare = 0;
 		auto left_iter = left.begin();
 		auto right_iter = right.begin();
 		while (left_iter != left.end() && right_iter != right.end()) {
 			compare = *right_iter - *left_iter;
-			if (compare) {//right is bigger
+			comparison++;
+			if (compare > 0) {//right is bigger
 				nums[left_index++] = *left_iter;
 				left_iter++;
 			}
@@ -64,6 +76,25 @@ namespace MergeSortV2 {
 
 	void MergeSort(std::vector<int>& nums, int S)
 	{
-		return MergeSort(nums, 0, nums.size(), S);
+		ResetComparison();
+		return MergeSort(nums, 0, nums.size() - 1, S);
+	}
+}
+
+void InsertionSort(std::vector<int>& nums, int left, int right)
+{
+	if ((right - left) < 1) return;
+	for (int i = left + 1; i <= right; i++) {
+		for (int j = i; j > left; j--) {
+			MergeSortV2::comparison++;
+			if (nums[j] < nums[j - 1]) {
+				//swap
+				auto temp = nums[j];
+				nums[j] = nums[j - 1];
+				nums[j - 1] = temp;
+			}
+			else
+				break;
+		}
 	}
 }
