@@ -5,6 +5,8 @@ void InsertionSort(std::vector<int>& nums, int left, int right);
 
 namespace MergeSortV2 {
 	int comparison = 0;
+	int iterations = 0;
+	int it = 0;
 
 	void ResetComparison()
 	{
@@ -70,14 +72,19 @@ namespace MergeSortV2 {
 			MergeSort(nums, mid + 1, right, S);
 			Merge(nums, left, mid, right);
 		}
-		else
+		else {
+			iterations++;
 			InsertionSort(nums, left, right);
+		}
 	}
 
 	void MergeSort(std::vector<int>& nums, int S)
 	{
 		ResetComparison();
-		return MergeSort(nums, 0, nums.size() - 1, S);
+		iterations = 0;
+		it = 0;
+		MergeSort(nums, 0, nums.size() - 1, S);
+		std::cout << "iterations: " << iterations << " " << it << std::endl;
 	}
 }
 
@@ -86,6 +93,7 @@ void InsertionSort(std::vector<int>& nums, int left, int right)
 	if ((right - left) < 1) return;
 	for (int i = left + 1; i <= right; i++) {
 		for (int j = i; j > left; j--) {
+			MergeSortV2::it++;
 			MergeSortV2::comparison++;
 			if (nums[j] < nums[j - 1]) {
 				//swap

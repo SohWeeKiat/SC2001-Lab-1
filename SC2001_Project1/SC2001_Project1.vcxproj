@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CSVGenerator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MergeSortV1.cpp" />
     <ClCompile Include="MergeSortV2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CSVGenerator.hpp" />
     <ClInclude Include="MergeSortV1.hpp" />
     <ClInclude Include="MergeSortV2.hpp" />
   </ItemGroup>

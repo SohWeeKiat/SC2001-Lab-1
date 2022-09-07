@@ -19,6 +19,9 @@
     <Filter Include="Header Files\MergeSortV1">
       <UniqueIdentifier>{32a2f718-96f7-45de-8483-5f7af675bce7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CSVGenerator">
+      <UniqueIdentifier>{160955fd-d8f6-49bf-9af5-32269e99664c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="MergeSortV2.cpp">
       <Filter>Header Files\MergeSortV2</Filter>
     </ClCompile>
+    <ClCompile Include="CSVGenerator.cpp">
+      <Filter>Header Files\CSVGenerator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MergeSortV1.hpp">
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="MergeSortV2.hpp">
       <Filter>Header Files\MergeSortV2</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVGenerator.hpp">
+      <Filter>Header Files\CSVGenerator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
