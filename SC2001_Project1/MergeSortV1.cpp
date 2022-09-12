@@ -2,17 +2,22 @@
 #include <iostream>
 
 namespace MergeSortV1 {
-	int comparison = 0;
-	int iterations = 0;
+	__int64 comparison = 0;
+	__int64 iterations = 0;
 
 	void ResetComparison()
 	{
 		comparison = 0;
 	}
 
-	int GetComparison()
+	__int64 GetComparison()
 	{
 		return comparison;
+	}
+
+	__int64 GetIterations()
+	{
+		return iterations;
 	}
 
 	void Merge(std::vector<int>& nums, int left_index, int mid, int right_index)
