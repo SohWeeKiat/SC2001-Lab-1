@@ -6,12 +6,12 @@
 #include "CSVGenerator.hpp"
 
 #define MIN_VALUE 1
-#define MAX_VALUE 10000
+#define MAX_VALUE 100000
 
-std::vector<int> GenerateRandomNumbers(int size)
+std::vector<int> GenerateRandomNumbers(unsigned int size)
 {
 	std::vector<int> temp(size);
-	for (int i = 0; i < size; i++)
+	for (unsigned int i = 0; i < size; i++)
 		temp[i] = MIN_VALUE + rand() % MAX_VALUE;
 	return temp;
 }
@@ -65,7 +65,7 @@ int main()
 {
 	srand(GetTickCount());
 	std::vector <std::vector<int>> original_data;
-	for (int i = 1000; i <= 2000000000; i *= 5)
+	for (unsigned int i = 1000000; i <= 10000000; i += 1000000)
 		original_data.push_back(GenerateRandomNumbers(i));
 
 	TestOriginalMergeSort(original_data);

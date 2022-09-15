@@ -97,9 +97,10 @@ void InsertionSort(std::vector<int>& nums, int left, int right)
 {
 	if ((right - left) < 1) return;
 	for (int i = left + 1; i <= right; i++) {
+		MergeSortV2::comparison++;
 		for (int j = i; j > left; j--) {
 			MergeSortV2::it++;
-			MergeSortV2::comparison++;
+			
 			if (nums[j] < nums[j - 1]) {
 				//swap
 				auto temp = nums[j];
