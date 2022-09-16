@@ -4,16 +4,23 @@
 void InsertionSort(std::vector<int>& nums, int left, int right);
 
 namespace MergeSortV2 {
-	int comparison = 0;
+	__int64 comparison = 0;
+	__int64 iterations = 0;
+	__int64 it = 0;
 
 	void ResetComparison()
 	{
 		comparison = 0;
 	}
 
-	int GetComparison()
+	__int64 GetComparison()
 	{
 		return comparison;
+	}
+
+	__int64 GetIterations()
+	{
+		return iterations;
 	}
 
 	void Merge(std::vector<int>& nums, int left_index, int mid, int right_index)
@@ -70,14 +77,19 @@ namespace MergeSortV2 {
 			MergeSort(nums, mid + 1, right, S);
 			Merge(nums, left, mid, right);
 		}
-		else
+		else {
+			iterations++;
 			InsertionSort(nums, left, right);
+		}
 	}
 
 	void MergeSort(std::vector<int>& nums, int S)
 	{
 		ResetComparison();
-		return MergeSort(nums, 0, nums.size() - 1, S);
+		iterations = 0;
+		it = 0;
+		MergeSort(nums, 0, nums.size() - 1, S);
+		std::cout << "iterations: " << iterations << " " << it << std::endl;
 	}
 }
 
@@ -85,8 +97,10 @@ void InsertionSort(std::vector<int>& nums, int left, int right)
 {
 	if ((right - left) < 1) return;
 	for (int i = left + 1; i <= right; i++) {
+		MergeSortV2::comparison++;
 		for (int j = i; j > left; j--) {
-			MergeSortV2::comparison++;
+			MergeSortV2::it++;
+			
 			if (nums[j] < nums[j - 1]) {
 				//swap
 				auto temp = nums[j];

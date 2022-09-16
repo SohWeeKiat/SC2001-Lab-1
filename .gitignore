@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SC2001_Project1/MergeSort.csv
+/SC2001_Project1/MergeInsertion.csv

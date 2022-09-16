@@ -2,16 +2,22 @@
 #include <iostream>
 
 namespace MergeSortV1 {
-	int comparison = 0;
+	__int64 comparison = 0;
+	__int64 iterations = 0;
 
 	void ResetComparison()
 	{
 		comparison = 0;
 	}
 
-	int GetComparison()
+	__int64 GetComparison()
 	{
 		return comparison;
+	}
+
+	__int64 GetIterations()
+	{
+		return iterations;
 	}
 
 	void Merge(std::vector<int>& nums, int left_index, int mid, int right_index)
@@ -63,6 +69,9 @@ namespace MergeSortV1 {
 	{
 		int mid = (left + right) / 2;
 		int length = right - left;
+		if (length <= 5) {
+			iterations++;
+		}
 		if (length <= 0) return;
 		else if (length) {
 			MergeSort(nums, left, mid);
@@ -88,6 +97,8 @@ namespace MergeSortV1 {
 	void MergeSort(std::vector<int>& nums)
 	{
 		ResetComparison();
-		return MergeSort(nums, 0, nums.size() - 1);
+		iterations = 0;
+		MergeSort(nums, 0, nums.size() - 1);
+		std::cout << "iterations: " << iterations << std::endl;
 	}
 }
