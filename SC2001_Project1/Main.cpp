@@ -6,7 +6,7 @@
 #include "CSVGenerator.hpp"
 
 #define MIN_VALUE 1
-#define MAX_VALUE 100000
+#define MAX_VALUE INT_MAX
 
 std::vector<int> GenerateRandomNumbers(unsigned int size)
 {
@@ -64,14 +64,19 @@ void TestMergeInsertionSort(std::vector<std::vector<int>>& original_data, CSVGen
 int main()
 {
 	srand(GetTickCount());
+	std::vector<int> random_data = GenerateRandomNumbers(10000000);
 	std::vector <std::vector<int>> original_data;
-	for (unsigned int i = 1000000; i <= 10000000; i += 1000000)
-		original_data.push_back(GenerateRandomNumbers(i));
+	for (int i = 1; i < 7; i++) {
+		original_data.push_back(std::move(std::vector<int>(random_data.begin(), random_data.begin() + std::pow(10,i))));
+	}
+	for (unsigned int i = 2000000; i < 10000000; i += 500000)
+		original_data.push_back(std::move(std::vector<int>(random_data.begin(), random_data.begin() + i)));
+	original_data.push_back(random_data);
 
 	TestOriginalMergeSort(original_data);
 	std::cout << "-----------------------------------------------" << std::endl;
-	for (int i = 0; i < 50; i++) {
-		CSVGenerator t("MergeInsertion" + std::to_string(i) + ".csv", "Size,S,Time,Comparison");
+	CSVGenerator t("MergeInsertion.csv", "Size,S,Time,Comparison");
+	for (int i = 0; i < 500; i++) {
 		TestMergeInsertionSort(original_data, t, i);
 	}
 

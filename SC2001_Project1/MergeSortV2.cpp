@@ -89,7 +89,7 @@ namespace MergeSortV2 {
 		iterations = 0;
 		it = 0;
 		MergeSort(nums, 0, nums.size() - 1, S);
-		std::cout << "iterations: " << iterations << " " << it << std::endl;
+		//std::cout << "iterations: " << iterations << " " << it << std::endl;
 	}
 }
 
@@ -97,10 +97,9 @@ void InsertionSort(std::vector<int>& nums, int left, int right)
 {
 	if ((right - left) < 1) return;
 	for (int i = left + 1; i <= right; i++) {
-		MergeSortV2::comparison++;
 		for (int j = i; j > left; j--) {
 			MergeSortV2::it++;
-			
+			MergeSortV2::comparison++;
 			if (nums[j] < nums[j - 1]) {
 				//swap
 				auto temp = nums[j];
