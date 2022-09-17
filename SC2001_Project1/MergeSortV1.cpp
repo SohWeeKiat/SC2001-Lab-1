@@ -69,9 +69,9 @@ namespace MergeSortV1 {
 	{
 		int mid = (left + right) / 2;
 		int length = right - left;
-		if (length <= 5) {
+		/*if (length <= 5) {
 			iterations++;
-		}
+		}*/
 		if (length <= 0) return;
 		else if (length) {
 			MergeSort(nums, left, mid);
@@ -99,6 +99,6 @@ namespace MergeSortV1 {
 		ResetComparison();
 		iterations = 0;
 		MergeSort(nums, 0, nums.size() - 1);
-		std::cout << "iterations: " << iterations << std::endl;
+		//std::cout << "iterations: " << iterations << std::endl;
 	}
 }
